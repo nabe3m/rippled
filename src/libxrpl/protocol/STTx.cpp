@@ -610,6 +610,13 @@ isMemoOkay(STObject const& st, std::string& reason)
 
     auto const& memos = st.getFieldArray(sfMemos);
 
+    // Check if Memos array is empty
+    if (memos.empty())
+    {
+        reason = "Memos field cannot be empty.";
+        return false;
+    }
+
     // The number 2048 is a preallocation hint, not a hard limit
     // to avoid allocate/copy/free's
     Serializer s(2048);

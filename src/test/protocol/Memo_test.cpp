@@ -124,6 +124,14 @@ public:
                     "may only contain characters that are allowed in URLs "
                     "under RFC 3986."));
         }
+        {
+            // Test empty Memos array - should be invalid.
+            JTx memoEmpty = noop(alice);
+            memoEmpty.jv[sfMemos.jsonName] = Json::Value(Json::arrayValue);
+            env(memoEmpty,
+                rpc("invalidTransaction",
+                    "fails local checks: Memos field cannot be empty."));
+        }
     }
 
     //--------------------------------------------------------------------------
